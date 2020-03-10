@@ -80,6 +80,7 @@ void OnMultLine(int m_ar, int m_br, int n_threads)
 	char st[100];
 	double temp;
 	int i, j, k;
+	int N=0;
 
 	double *pha, *phb, *phc;
 	
@@ -102,13 +103,14 @@ void OnMultLine(int m_ar, int m_br, int n_threads)
 
 
     Time1 = clock();
-	#pragma omp parallel for num_threads(n_threads)
+	//#pragma omp parallel for num_threads(n_threads)
 	for(i=0; i<m_ar; i++)
 	{	for( j=0; j<m_br; j++)
 		{	temp = 0;
 			for( k=0; k<m_ar; k++)
 			{	
 				temp += pha[i*m_ar+k] * phb[i*m_br+k];
+				N++;
 			}
 			phc[i*m_ar+j]=temp;
 		}
@@ -124,7 +126,7 @@ void OnMultLine(int m_ar, int m_br, int n_threads)
 	{	for(j=0; j<min(10,m_br); j++)
 			cout << phc[j] << " ";
 	}
-	cout << endl;
+	cout << endl << N << endl;
 
     free(pha);
     free(phb);
