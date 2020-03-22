@@ -1,42 +1,68 @@
+import java.util.Scanner;
 public class Matrix{
 
     public static void main(String args[]){
-        onMult(1000,1000);
+        switch (args[0]) {
+            case "1":
+                onMult(Integer.parseInt(args[1]),Integer.parseInt(args[2]));
+                break;
+        
+            case "2":
+                onMultLine(Integer.parseInt(args[1]),Integer.parseInt(args[2]));
+                break;
+        }
     }
 
     private static void onMult(int m_ar, int m_br){
-        double[][] pha = new double[m_ar][m_ar];
-        double[][] phb = new double[m_ar][m_ar];
-        double[][] phc = new double[m_ar][m_ar];
+        double[] pha = new double[m_ar*m_br];
+        double[] phb = new double[m_ar*m_br];
+        double[] phc = new double[m_ar*m_br];
 
 
         for(int i=0;i<m_ar;i++){
-            for(int w=0;w<m_ar;w++){
-                pha[i][w]=(double)1.0;
-                phb[i][w]=(double)(i+1);
+            for(int w=0;w<m_br;w++){
+                pha[i*m_ar+w]=(double)1.0;
+                phb[i*m_ar+w]=(double)(i+1);
             }
         }
 
-        long startTime = System.nanoTime();
-
+        long startTime = System.currentTimeMillis();
         for(int i=0; i<m_ar; i++){
         	for(int w=0; w<m_br; w++){
             	int temp = 0;
 			    for(int k=0; k<m_ar; k++){	
-				    temp += pha[i][w] * phb[k][w];
+				    temp += pha[i*m_ar+w] * phb[k*m_ar+w];
 			    }
-			    phc[i][w]=temp;
+			    phc[i*m_ar+w]=temp;
 		    }
-	    }
-
-        long endTime = System.nanoTime();
-        long duration = (endTime - startTime);
-        System.out.println(duration);
-        for(int i=0; i<1; i++)
-        {	for(int j=0; j<m_ar; j++)
-                System.out.print(phc[i][j] + " ");
-            System.out.println();
         }
+        long diffTime = (System.currentTimeMillis() - startTime);
+        System.out.println("Time: " + diffTime + " ms");
+    }
+
+    private static void onMultLine(int m_ar, int m_br){
+        double[] pha = new double[m_ar*m_br];
+        double[] phb = new double[m_ar*m_br];
+        double[] phc = new double[m_ar*m_br];
+
+
+        for(int i=0;i<m_ar;i++){
+            for(int w=0;w<m_ar;w++){
+                pha[i*m_ar+w]=(double)1.0;
+                phb[i*m_ar+w]=(double)(i+1);
+            }
+        }
+
+        long startTime = System.currentTimeMillis();
+        for(int i=0; i<m_ar; i++){
+        	for(int w=0; w<m_br; w++){
+			    for(int k=0; k<m_ar; k++){	
+				    phc[i*m_ar+k] += pha[i*m_ar+k] * phb[w*m_ar+k];
+			    }
+		    }
+        }
+        long diffTime = (System.currentTimeMillis() - startTime);
+        System.out.println("Time: " + diffTime + " ms");
     }
 
 }

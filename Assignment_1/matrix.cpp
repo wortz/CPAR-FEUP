@@ -79,7 +79,6 @@ void OnMultLine(int m_ar, int m_br)
 	char st[100];
 	double temp;
 	int i, j, k;
-	int N=0;
 
 	double *pha, *phb, *phc;
 	
@@ -89,28 +88,23 @@ void OnMultLine(int m_ar, int m_br)
 	phb = (double *)malloc((m_ar * m_ar) * sizeof(double));
 	phc = (double *)malloc((m_ar * m_ar) * sizeof(double));
 
-	for(i=0; i<m_ar; i++)
-		for(j=0; j<m_ar; j++)
+	for(i=0; i<m_ar; i++){
+		for(j=0; j<m_ar; j++){
 			pha[i*m_ar + j] = (double)1.0;
-
-
-
-	for(i=0; i<m_br; i++)
-		for(j=0; j<m_br; j++)
-			phb[i*m_br + j] = (double)(j+1);
+			phb[i*m_ar + j] = (double)(i+1);
+		}
+	}
 
 
 
     Time1 = clock();
 	for(i=0; i<m_ar; i++)
 	{	for( j=0; j<m_br; j++)
-		{	temp = 0;
+		{	
 			for( k=0; k<m_ar; k++)
 			{	
-				temp += pha[i*m_ar+k] * phb[i*m_br+k];
-				N++;
+				phc[i*m_ar+k] += pha[i*m_ar+k] * phb[j*m_ar+k];
 			}
-			phc[i*m_ar+j]=temp;
 		}
 	}
 
@@ -119,12 +113,12 @@ void OnMultLine(int m_ar, int m_br)
 	sprintf(st, "Time: %3.3f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
 	cout << st;
 
-	cout << "Result matrix: " << endl;
+	/*cout << "Result matrix: " << endl;
 	for(i=0; i<1; i++)
 	{	for(j=0; j<min(10,m_br); j++)
 			cout << phc[j] << " ";
 	}
-	cout << endl << N << endl;
+	cout << endl;*/
 
     free(pha);
     free(phb);
@@ -148,31 +142,12 @@ void OnBlock(int m_ar, int block_size)
     pha = (double *)malloc((m_ar * m_ar) * sizeof(double));
 	phb = (double *)malloc((m_ar * m_ar) * sizeof(double));
 	phc = (double *)malloc((m_ar * m_ar) * sizeof(double));
-
-	for(i=0; i<m_ar; i++)
-		for(j=0; j<m_ar; j++)
+	for(i=0; i<m_ar; i++){
+		for(j=0; j<m_ar; j++){
 			pha[i*m_ar + j] = (double)1.0;
-
-
-
-	for(i=0; i<m_ar; i++)
-		for(j=0; j<m_ar; j++)
 			phb[i*m_ar + j] = (double)(i+1);
-			
-	cout << "Matrix A:" << endl;
-	for(i=0; i<m_ar; i++)
-	{	for(j=0; j<m_ar; j++)
-			cout << pha[i*m_ar + j] << " ";
-		cout << endl;
+		}
 	}
-	cout << "Matrix B:" << endl;
-	for(i=0; i<m_ar; i++)
-	{	for(j=0; j<m_ar; j++)
-			cout << phb[i*m_ar + j] << " ";
-		cout << endl;
-	}
-	cout << endl;
-
 
     Time1 = clock();
 	for(block_j=0; block_j < m_ar; block_j += block_size){
@@ -194,13 +169,12 @@ void OnBlock(int m_ar, int block_size)
 	sprintf(st, "Time: %3.3f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
 	cout << st;
 
-	cout << "Result matrix: " << endl;
-	for(i=0; i<m_ar; i++)
-	{	for(j=0; j<m_ar; j++)
+	/*cout << "Result matrix: " << endl;
+	for(i=0; i<1; i++)
+	{	for(j=0; j<min(10,m_ar); j++)
 			cout << phc[j] << " ";
-		cout << endl;
 	}
-	cout << endl;
+	cout << endl;*/
 
     free(pha);
     free(phb);
