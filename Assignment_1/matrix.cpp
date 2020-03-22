@@ -162,15 +162,14 @@ void OnBlock(int m_ar, int block_size)
 
 
     Time1 = clock();
-	for(block_j=0; block_j < size; block_j += block_size){
-		for(block_k=0; block_k < size; block_k += block_size){
+	for(block_j=0; block_j < m_ar; block_j += block_size){
+		for(block_k=0; block_k < m_ar; block_k += block_size){
 			for(i=0; i<m_ar; i++)
 			{	for( j=block_j; j<min(m_ar, block_j+block_size); j++)
 				{	temp = 0;
 					for( k=block_k; k<min(m_ar, block_k+block_size); k++)
 					{	
 						temp += pha[i*m_ar+k] * phb[i*m_ar+k];
-						N++;
 					}
 					phc[i*m_ar+j]=temp;
 				}
