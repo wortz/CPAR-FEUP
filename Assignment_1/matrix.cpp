@@ -132,6 +132,71 @@ void OnMultLine(int m_ar, int m_br)
     
 }
 
+void OnBlock(int m_ar, int block_size) 
+{
+	
+	SYSTEMTIME Time1, Time2;
+	
+	char st[100];
+	double temp;
+	int i, j, k, block_j, block_k;
+
+	double *pha, *phb, *phc;
+	
+
+		
+    pha = (double *)malloc((m_ar * m_ar) * sizeof(double));
+	phb = (double *)malloc((m_ar * m_ar) * sizeof(double));
+	phc = (double *)malloc((m_ar * m_ar) * sizeof(double));
+
+	for(i=0; i<m_ar; i++)
+		for(j=0; j<m_ar; j++)
+			pha[i*m_ar + j] = (double)1.0;
+
+
+
+	for(i=0; i<m_ar; i++)
+		for(j=0; j<m_ar; j++)
+			phb[i*m_ar + j] = (double)(i+1);
+
+
+
+    Time1 = clock();
+	for(block_j=0; block_j < size; block_j += block_size){
+		for(block_k=0; block_k < size; block_k += block_size){
+			for(i=0; i<m_ar; i++)
+			{	for( j=block_j; j<min(m_ar, block_j+block_size); j++)
+				{	temp = 0;
+					for( k=block_k; k<min(m_ar, block_k+block_size); k++)
+					{	
+						temp += pha[i*m_ar+k] * phb[i*m_ar+k];
+						N++;
+					}
+					phc[i*m_ar+j]=temp;
+				}
+			}
+		}
+	}
+
+
+    Time2 = clock();
+	sprintf(st, "Time: %3.3f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
+	cout << st;
+
+	cout << "Result matrix: " << endl;
+	for(i=0; i<1; i++)
+	{	for(j=0; j<min(10,m_ar); j++)
+			cout << phc[j] << " ";
+	}
+	cout << endl;
+
+    free(pha);
+    free(phb);
+    free(phc);
+	
+	
+}
+
 
 float produtoInterno(float *v1, float *v2, int col)
 {
@@ -143,6 +208,13 @@ float produtoInterno(float *v1, float *v2, int col)
 	
 	return(soma);
 
+}
+
+double min(double d1, double d2){
+	if(d1 > d2){
+		return d2;
+	}
+	return d1;
 }
 
 void handle_error (int retval)
@@ -219,7 +291,10 @@ int main (int argc, char *argv[])
 				break;
 			case 2:
 				OnMultLine(lin, col);
-    
+				break;
+			case 3:
+				// col here is the size of the block
+				OnBlock(lin, col);
 				break;
 		}
 
