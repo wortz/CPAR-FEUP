@@ -11,7 +11,7 @@ using namespace std;
 #define SYSTEMTIME clock_t
 
  
-void OnMult(int m_ar, int m_br, int n_threads) 
+void OnMult(int m_ar, int m_br) 
 {
 	
 	SYSTEMTIME Time1, Time2;
@@ -41,7 +41,6 @@ void OnMult(int m_ar, int m_br, int n_threads)
 
 
     Time1 = clock();
-	#pragma omp parallel for num_threads(n_threads)
 	for(i=0; i<m_ar; i++)
 	{	for( j=0; j<m_br; j++)
 		{	temp = 0;
@@ -73,7 +72,7 @@ void OnMult(int m_ar, int m_br, int n_threads)
 }
 
 
-void OnMultLine(int m_ar, int m_br, int n_threads)
+void OnMultLine(int m_ar, int m_br)
 {
     SYSTEMTIME Time1, Time2;
 	
@@ -103,7 +102,6 @@ void OnMultLine(int m_ar, int m_br, int n_threads)
 
 
     Time1 = clock();
-	//#pragma omp parallel for num_threads(n_threads)
 	for(i=0; i<m_ar; i++)
 	{	for( j=0; j<m_br; j++)
 		{	temp = 0;
@@ -205,8 +203,6 @@ int main (int argc, char *argv[])
 		cin >>op;
 		if (op == 0)
 			break;
-		cout << "Number of threads: " << endl;
-		cin >> n_threads;
 		printf("Dimensions: lins cols ? ");
    		cin >> lin >> col;
 		
@@ -219,10 +215,10 @@ int main (int argc, char *argv[])
 
 		switch (op){
 			case 1: 
-				OnMult(lin, col, n_threads);
+				OnMult(lin, col);
 				break;
 			case 2:
-				OnMultLine(lin, col, n_threads);
+				OnMultLine(lin, col);
     
 				break;
 		}
