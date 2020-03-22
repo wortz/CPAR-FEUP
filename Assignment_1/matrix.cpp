@@ -158,7 +158,20 @@ void OnBlock(int m_ar, int block_size)
 	for(i=0; i<m_ar; i++)
 		for(j=0; j<m_ar; j++)
 			phb[i*m_ar + j] = (double)(i+1);
-
+			
+	cout << "Matrix A:" << endl;
+	for(i=0; i<m_ar; i++)
+	{	for(j=0; j<m_ar; j++)
+			cout << pha[i*m_ar + j] << " ";
+		cout << endl;
+	}
+	cout << "Matrix B:" << endl;
+	for(i=0; i<m_ar; i++)
+	{	for(j=0; j<m_ar; j++)
+			cout << phb[i*m_ar + j] << " ";
+		cout << endl;
+	}
+	cout << endl;
 
 
     Time1 = clock();
@@ -166,26 +179,26 @@ void OnBlock(int m_ar, int block_size)
 		for(block_k=0; block_k < m_ar; block_k += block_size){
 			for(i=0; i<m_ar; i++)
 			{	for( j=block_j; j<min(m_ar, block_j+block_size); j++)
-				{	temp = 0;
+				{
 					for( k=block_k; k<min(m_ar, block_k+block_size); k++)
 					{	
-						temp += pha[i*m_ar+k] * phb[i*m_ar+k];
+						phc[i*m_ar+j]+=pha[i*m_ar+k]*phb[k*m_ar+j];
 					}
-					phc[i*m_ar+j]=temp;
 				}
 			}
 		}
 	}
-
+	
 
     Time2 = clock();
 	sprintf(st, "Time: %3.3f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
 	cout << st;
 
 	cout << "Result matrix: " << endl;
-	for(i=0; i<1; i++)
-	{	for(j=0; j<min(10,m_ar); j++)
+	for(i=0; i<m_ar; i++)
+	{	for(j=0; j<m_ar; j++)
 			cout << phc[j] << " ";
+		cout << endl;
 	}
 	cout << endl;
 
