@@ -113,12 +113,12 @@ void OnMultLine(int m_ar, int m_br)
 	sprintf(st, "Time: %3.3f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
 	cout << st;
 
-	/*cout << "Result matrix: " << endl;
+	cout << "Result matrix: " << endl;
 	for(i=0; i<1; i++)
 	{	for(j=0; j<min(10,m_br); j++)
 			cout << phc[j] << " ";
 	}
-	cout << endl;*/
+	cout << endl;
 
     free(pha);
     free(phb);
@@ -169,12 +169,12 @@ void OnBlock(int m_ar, int block_size)
 	sprintf(st, "Time: %3.3f seconds\n", (double)(Time2 - Time1) / CLOCKS_PER_SEC);
 	cout << st;
 
-	/*cout << "Result matrix: " << endl;
+	cout << "Result matrix: " << endl;
 	for(i=0; i<1; i++)
 	{	for(j=0; j<min(10,m_ar); j++)
 			cout << phc[j] << " ";
 	}
-	cout << endl;*/
+	cout << endl;
 
     free(pha);
     free(phb);
