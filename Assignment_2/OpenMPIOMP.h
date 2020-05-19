@@ -1,9 +1,10 @@
-#ifndef OPENMPI_H
-#define OPENMPI_H
+#ifndef OPENMPIOMP_H
+#define OPENMPIOMP_H
 
 #include <iostream>
 #include <cmath>
 #include <time.h>
+#include <omp.h>
 #include "/usr/include/mpi/mpi.h"
 
 #include "Utils.h"
@@ -14,7 +15,7 @@ using namespace std;
 #define BLOCK_HIGH(i, n, p) (BLOCK_LOW((i) + 1, n, p) - 1)
 #define BLOCK_SIZE(i, n, p) (BLOCK_LOW((i) + 1, n, p) - BLOCK_LOW(i, n, p))
 
-void openMPI(unsigned long n);
+void openMPIOMP(unsigned long n, int threads);
 
 
 #endif

@@ -1,12 +1,14 @@
-#include "OpenMPI.h"
+#include "OpenMPIOMP.h"
 
-void openMPI(unsigned long n){
+void openMPI(unsigned long n, int threads){
 
     double startTime;
     double endTime;
 
     unsigned long long length = pow(2, n) / 2;
     unsigned long long target = length*2;
+
+    omp_set_num_threads(threads);
 
     int rank, size;
 
@@ -42,7 +44,7 @@ void openMPI(unsigned long n){
                     firstValue += k;
                 }
             }
-
+        #pragma omp parallel for
         for (long long i = firstValue; i <= upperBound; i+=2*k)
         {
             
@@ -74,8 +76,9 @@ int main(int argc, char** argv){
     MPI_Init(&argc, &argv);
 
     unsigned long n = atol(argv[1]);
+    int numOfThreads = atoi(argv[2]);
 
-    openMPI(n);
+    openMPI(n, numOfThreads);
 
     MPI_Finalize();
     
