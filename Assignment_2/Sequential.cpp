@@ -5,7 +5,7 @@ void manualSequential(){
     unsigned long input = 0;
     double time;
 
-    while(!(input <= 32 && input >= 1)){
+    while(!(input <= 32 && input >= 25)){
         cout << "Select a number between 25 and 32: ";
         cin >> input;
     }
@@ -76,6 +76,6 @@ double sequential(unsigned long n, int option){
     
     delete list;
 
-    return endTime - startTime;
+    return (endTime - startTime) / 1000000;
 
 }

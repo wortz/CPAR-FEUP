@@ -2,6 +2,8 @@
 #include <string>
 
 #include "Sequential.h"
+#include "OpenMP.h"
+
 #include "Utils.h"
 
 using namespace std;
@@ -31,16 +33,17 @@ int main(int argc, char** argv){
             }else{
                 manualSequential();
             }
-            
             break;
 
         case 2:
+            if (type == "auto"){
+                autoOpenMP();
+            }else{
+                manualOpenMP();
+            }
             break;
 
         case 3:
-            break;
-
-        case 4:
             break;
 
         default:
