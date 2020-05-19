@@ -1,0 +1,7 @@
+Size: 25   Time: 445508
+Size: 26   Time: 957256
+Size: 27   Time: 2.07197e+06
+Size: 28   Time: 4.32704e+06
+Size: 29   Time: 9.16361e+06
+Size: 30   Time: 1.89105e+07
+Size: 31   Time: 4.0868e+07
