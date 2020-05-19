@@ -7,10 +7,19 @@ void printPrimes(bool* list, unsigned long long size){
     
     sequence << "Size " << size << ":\n" << "[2";
 
-    for(unsigned long i = 3; i <= size; i++){
+    int n = 1;
+
+    for(unsigned long i = 1; i <= size; i++){
         if (list[i]){
-            sequence << ", " << i;
+            if (n == 5){
+                sequence << ", \n" << 2*i+1;
+                n = 0;
+                continue;
+            }
+            sequence << ", " << 2*i+1;
+            n++;
         }
+        
     }
 
     sequence << "]" << endl;
