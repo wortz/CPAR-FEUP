@@ -10,4 +10,6 @@ using namespace std;
 
 void printPrimes(bool* list, unsigned long long size);
 
+long countPrimes(bool* list, long long size);
+
 #endif

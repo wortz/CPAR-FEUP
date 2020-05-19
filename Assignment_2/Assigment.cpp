@@ -14,14 +14,13 @@ int main(int argc, char** argv){
     if(argc==2){
         type = argv[1];
     }
-    if(type != "auto" && type !="manual"){
-        cout << "Error: Usage ./main <manual/auto>\n";
+    if(type != "auto" && type !="manual" && !isdigit(atoi(argv[1]))){
+        cout << "Error: Usage ./main <manual/auto/exponent>\n";
         return 0;
     }
     cout << endl;
     cout << "1. Sequential" << endl;
     cout << "2. OpenMP" << endl;
-    cout << "3. OpenMPI" << endl;
     cout << "Option: ";
     cin >> option;
 
@@ -30,7 +29,7 @@ int main(int argc, char** argv){
         case 1:
             if (type == "auto"){
                 autoSequential();
-            }else{
+            }else if (type == "manual"){
                 manualSequential();
             }
             break;
@@ -38,15 +37,14 @@ int main(int argc, char** argv){
         case 2:
             if (type == "auto"){
                 autoOpenMP();
-            }else{
+            }else if (type == "manual"){
                 manualOpenMP();
             }
-            break;
-
-        case 3:
             break;
 
         default:
             break;
     }
+
+    return 0;
 }

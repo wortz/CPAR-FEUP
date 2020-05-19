@@ -1,0 +1,8 @@
+Size: 25   Time: 1.21897   Threads: 1
+Size: 26   Time: 2.28577   Threads: 1
+Size: 27   Time: 4.13557   Threads: 1
+Size: 28   Time: 8.15437   Threads: 1
+Size: 29   Time: 16.0406   Threads: 1
+Size: 30   Time: 31.7338   Threads: 1
+Size: 31   Time: 63.0551   Threads: 1
+Size: 32   Time: 133.045   Threads: 1
