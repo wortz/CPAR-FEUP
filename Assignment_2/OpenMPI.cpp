@@ -26,7 +26,7 @@ void openMPI(unsigned long n){
 
     unsigned long long k;
 
-    for(k = 3; k < upperBound; k+=2)
+    for(k = 3; k*k < upperBound; k+=2)
     {
 
         long long firstValue = k*k;

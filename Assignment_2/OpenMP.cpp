@@ -33,7 +33,7 @@ void autoOpenMP(){
     double time;
 
     omp_set_dynamic(0);
-    int maxThreads = omp_get_max_threads();
+    int maxThreads = 2;
 
     for(unsigned long n = 25; n <= 32; n++){
         time = openMP(n, 2, maxThreads);
@@ -66,7 +66,7 @@ double openMP(unsigned long n, int option, int threads){
     // 1 is not prime
     list[0] = false;
 
-    for (unsigned long long k = 1; k < size; k++) {
+    for (unsigned long long k = 1; k * k < size; k++) {
 
 
         if (!list[k]){

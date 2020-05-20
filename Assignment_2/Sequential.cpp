@@ -51,7 +51,7 @@ double sequential(unsigned long n, int option){
     // 1 is not prime
     list[0] = false;
 
-    for (unsigned long long k = 1; k < size; k++) {
+    for (unsigned long long k = 1; k * k < size; k++) {
 
 
         if (!list[k]){
