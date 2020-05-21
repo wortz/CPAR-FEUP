@@ -33,7 +33,7 @@ void autoOpenMP(){
     double time;
 
     omp_set_dynamic(0);
-    int maxThreads = 2;
+    int maxThreads = 6;
 
     for(unsigned long n = 25; n <= 32; n++){
         time = openMP(n, 2, maxThreads);

@@ -5,7 +5,7 @@
 #include <cmath>
 #include <time.h>
 #include <omp.h>
-#include "/usr/include/mpi/mpi.h"
+#include "/usr/include/x86_64-linux-gnu/mpi/mpi.h"
 
 #include "Utils.h"
 
