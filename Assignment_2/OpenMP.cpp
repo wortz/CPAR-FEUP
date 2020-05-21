@@ -66,7 +66,7 @@ double openMP(unsigned long n, int option, int threads){
     // 1 is not prime
     list[0] = false;
 
-    for (unsigned long long k = 1; k * k < size; k++) {
+    for (unsigned long long k = 1; k * k < target; k++) {
 
 
         if (!list[k]){
